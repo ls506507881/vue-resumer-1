@@ -1,10 +1,10 @@
 <template>
   <div id="app" v-bind:class="{previewMode:previewMode}">
     <Topbar class="topbar" v-on:preview="preview"/>
-    <main>
+    <div class="main">
       <Editor v-bind:resume="resume" class="editor"/>
       <Preview v-bind:resume="resume" class="preview"/>
-    </main>
+    </div>
     <el-button id="exitPreview" v-on:click="exitPreview">退出预览</el-button>
   </div>
 </template>
@@ -73,7 +73,7 @@ body,
   fill: currentColor;
   overflow: hidden;
 }
-main {
+.main {
   display: flex;
   flex: 1;
   background: #DDD;
