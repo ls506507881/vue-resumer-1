@@ -13,36 +13,10 @@
         </nav>
         <ol class="panes">
           <li v-bind:class="{active:currentTab === 0}">
-              <h2>个人信息</h2>
-              <el-form>
-                <el-form-item label="姓名">
-                    <el-input v-model="profile.name"></el-input>
-                </el-form-item>
-                <el-form-item label="城市">
-                    <el-input v-model="profile.city"></el-input>
-                </el-form-item>
-                <el-form-item label="出生">
-                    <el-input v-model="profile.birth"></el-input>
-                </el-form-item>
-              </el-form>
+              <ProfileEditor v-bind:profile="profile" />
           </li>
           <li v-bind:class="{active:currentTab === 1}">
-              <h2>工作经历</h2>
-               <el-form>
-                 <div v-for="(work,index) in workHistory">
-                    <div class="container">
-                    <el-form-item label="公司">
-                      <el-input v-model="work.company"></el-input>
-                    </el-form-item>
-                    <el-form-item label="工作内容">
-                      <el-input v-model="work.content"></el-input>
-                    </el-form-item>
-                    <i class="el-icon-circle-close" v-on:click="removeworkHistory(index)"></i>
-                    </div>
-                    <hr>
-                 </div>
-                 <el-button type="primary" v-on:click = "addworkHistory">添加工作经历</el-button>
-               </el-form>
+              <workHistoryEditor v-bind:workHistory="workHistory"/>
           </li>
           <li v-bind:class="{active:currentTab === 2}">
               <h2>学习经历</h2>
@@ -60,7 +34,10 @@
     </div>
 </template>
 <script>
+import ProfileEditor from './ProfileEditor'
+import workHistoryEditor from './workHistoryEditor'
 export default {
+  components:{ ProfileEditor, workHistoryEditor },
   data(){
       return {
         currentTab: 0,
@@ -76,14 +53,7 @@ export default {
       }
     },
     methods:{
-        addworkHistory(){
-            this.workHistory.push({
-                company:'',content:''
-            })
-        },
-        removeworkHistory(index){
-            this.workHistory.splice(index,1)
-        }
+
     },
     created(){
         console.log(this.profile)
@@ -93,7 +63,6 @@ export default {
     } 
   }
 </script>
-
 <style lang="scss">
 #editor {
   min-height: 100px;
